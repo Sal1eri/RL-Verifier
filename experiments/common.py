@@ -1,6 +1,7 @@
 import os
 import re
-
+from datasets import load_dataset
+import os
 
 ANSWER_PATTERN_MULTICHOICE = r"(?i)Answer[ \t]*:[ \t]*\$?([A-D])\$?"
 ANSWER_PATTERN = r"(?i)Answer\s*:\s*([^\n]+)"
@@ -105,15 +106,28 @@ def extract_solution(solution_str: str) -> str:
     if boxed_answer:
         return boxed_answer
     return extract_last_final_answer(solution_str)
-# 1. 模拟模型输出
-raw_output = "Therefore, the final result is $\\boxed{\\mathbf{42}}$."
 
-# 2. 提取步骤 (使用正则)
-match = re.search(ANSWER_PATTERN_BOXED, raw_output)
-extracted = match.group(1)  # 提取到的是 "\mathbf{42}"
 
-# 3. 清洗步骤 (使用 normalize_response)
-final_answer = normalize_response(extracted)
+def load_aime(data_dir: str = "./aime_2024", split: str = "train"):
+    """
+    根据 split 加载本地 AIME 数据集
 
-print(f"原始提取: {extracted}")
-print(f"清洗后: {final_answer}")
+    参数：
+        data_dir: 存放 jsonl 的目录
+        split: "train" 或 "test"
+
+    返回：
+        HuggingFace Dataset
+    """
+    assert split in ["train", "test"], "split 必须是 'train' 或 'test'"
+
+    file_path = os.path.join(data_dir, f"{split}.jsonl")
+
+    dataset = load_dataset(
+        "json",
+        data_files=file_path,
+        split="train"
+    )
+
+    return dataset
+
