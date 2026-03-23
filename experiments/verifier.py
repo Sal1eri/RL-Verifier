@@ -18,7 +18,8 @@ class GeneralVerifier:
         self.torch_dtype = torch_dtype
 
         self.tokenizer = AutoTokenizer.from_pretrained(self.model_path,
-                                                       flash_attn_implementation="flash_attention_2")
+                                                    #    flash_attn_implementation="flash_attention_2"
+                                                       )
         self.model = AutoModelForCausalLM.from_pretrained(
             self.model_path,
             torch_dtype=self.torch_dtype,

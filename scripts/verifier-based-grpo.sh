@@ -1,0 +1,1 @@
+ CUDA_VISIBLE_DEVICES=1,2,3,4, accelerate launch train_grpo.py 
