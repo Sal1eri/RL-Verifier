@@ -130,4 +130,19 @@ def load_aime(data_dir: str = "./aime_2024", split: str = "train"):
     )
 
     return dataset
+def load_aime_chat_format(data_dir: str = "./aime_2024", split: str = "chat"):
+    """
+    根据 split 加载本地 AIME 数据集，并转换为聊天格式
 
+    参数：
+        data_dir: 存放 jsonl 的目录
+        split: "chat"
+
+    返回：
+        HuggingFace Dataset，包含 "prompt" 和 "solution" 两列
+    """
+    assert split == "chat", "split 必须是 'chat'"
+
+    file_path = os.path.join(data_dir, f"{split}.jsonl")
+    dataset = load_dataset("json", data_files=file_path, split="train")
+    return dataset
