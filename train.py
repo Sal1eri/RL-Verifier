@@ -4,10 +4,16 @@ from trl import GRPOTrainer, GRPOConfig
 from trl.rewards import accuracy_reward
 from experiments.reward_func import verifier_reward
 from experiments.common import load_aime_chat_format
-# dataset = load_aime_chat_format()
 from datasets import load_dataset
+# dataset = load_aime_chat_format()
+
 # model_name = "Qwen/Qwen2-0.5B-Instruct"
-dataset = load_dataset("trl-lib/DeepMath-103K", split="train")
+dataset = load_dataset("BytedTsinghua-SIA/DAPO-Math-17k", split="train[:2000]")
+dataset = dataset.map(lambda x: {
+    **x,
+    "solution": x["reward_model"]["ground_truth"]
+})
+
 model_name = "Qwen/Qwen3-4B-Base"
 
 peft_config = LoraConfig(
@@ -19,7 +25,7 @@ peft_config = LoraConfig(
 )
 
 training_args = GRPOConfig(
-    output_dir="./test",
+    output_dir="./DAPO_GRPO_LORA",
     per_device_train_batch_size=1,
     gradient_accumulation_steps=4,
     num_generations=8,
@@ -29,14 +35,14 @@ training_args = GRPOConfig(
     temperature=0.7,
     learning_rate=5e-7,
     beta=0.001,
-    max_steps=1000,
+    # max_steps=1000,
 )
 
 trainer = GRPOTrainer(
     model=model_name,
     args=training_args,
-    # reward_funcs=accuracy_reward,
-    reward_funcs = verifier_reward,
+    reward_funcs=accuracy_reward,
+    # reward_funcs = verifier_reward,
     train_dataset=dataset,
     peft_config=peft_config,
 )

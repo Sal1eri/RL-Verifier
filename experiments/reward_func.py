@@ -43,7 +43,7 @@ def verifier_reward(completions: list[list[dict[str, str]]], solution: list[str]
     # print('Prompts[0]:', prompts[0])
     contents = [completion[0]["content"] for completion in completions]
     rewards = []
-
+    print('Contents:', contents)
     for content, sol, p in zip(contents, solution, prompts):
 
         # print('p:',p)

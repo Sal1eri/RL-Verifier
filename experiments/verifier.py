@@ -3,6 +3,42 @@ from typing import List, Dict, Optional, Union
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
+from openai import OpenAI
+
+
+def verify_reward_from_vllm(
+        question: str,
+        ground_truth: str,
+        student_answer: str,
+        max_new_tokens: int = 1024,):
+    
+    client = OpenAI(
+        base_url="http://localhost:8000/v1",
+        api_key='empty'
+        )
+    VERIFIER_PASS_TAG = "Final Decision: Yes"
+    prompt = (
+    f"User: ### Question: {question}\n\n"
+    f"### Ground Truth Answer: {ground_truth}\n\n"
+    f"### Student Answer: {student_answer}\n\n"
+    "For the above question, please verify if the student's answer is equivalent to the ground truth answer.\n"
+    "Do not solve the question by yourself; just check if the student's answer is equivalent to the ground truth answer.\n"
+    "If the student's answer is correct, output \"Final Decision: Yes\". If the student's answer is incorrect, output \"Final Decision: No\". Assistant:"
+    )
+
+        
+    resp = client.completions.create(
+        model="TIGER-Lab/general-verifier",
+        prompt=prompt,
+        temperature=0.0,
+        max_tokens=max_new_tokens,
+    )
+
+    text = resp.choices[0].text
+    print(text)
+    reward = True if VERIFIER_PASS_TAG in text else False
+
+    return reward,text
 
 class GeneralVerifier:
     VERIFIER_PASS_TAG = "Final Decision: Yes"
@@ -115,3 +151,4 @@ class GeneralVerifier:
                 })
 
         return results
+    
