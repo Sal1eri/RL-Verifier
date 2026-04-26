@@ -208,4 +208,5 @@ __marimo__/
 
 # llm
 lora_grpo_out/
-lora_grpo_out_ver/ 
+lora_grpo_out_ver/
+outputs/ 

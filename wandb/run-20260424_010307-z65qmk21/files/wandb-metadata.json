@@ -1,0 +1,127 @@
+{
+  "os": "Linux-5.4.0-216-generic-x86_64-with-glibc2.31",
+  "python": "CPython 3.10.18",
+  "startedAt": "2026-04-23T17:03:07.035924Z",
+  "args": [
+    "--dataset-path",
+    "./mydata/dapo_math.jsonl",
+    "--reward-func",
+    "accuracy",
+    "--output-dir",
+    "./outputs/qwen3_4b_rule_v100x4_safe",
+    "--model-name",
+    "Qwen/Qwen3-4B-Base",
+    "--per-device-train-batch-size",
+    "1",
+    "--gradient-accumulation-steps",
+    "8",
+    "--num-generations",
+    "4",
+    "--max-completion-length",
+    "768",
+    "--learning-rate",
+    "5e-7",
+    "--beta",
+    "0.001",
+    "--temperature",
+    "0.7",
+    "--precision",
+    "fp16",
+    "--max-steps",
+    "100",
+    "--save-steps",
+    "20",
+    "--logging-steps",
+    "1",
+    "--report-to",
+    "wandb",
+    "--run-name",
+    "qwen3-4b-rule-v100x4-safe",
+    "--target-modules",
+    "q_proj,k_proj,v_proj,o_proj"
+  ],
+  "program": "/data/qiuyk/exp/RL-Verifier/train_grpo.py",
+  "codePath": "train_grpo.py",
+  "codePathLocal": "train_grpo.py",
+  "git": {
+    "remote": "https://github.com/Sal1eri/RL-Verifier.git",
+    "commit": "56d212c0582ece3ceb6936349d3b3f0594ebff29"
+  },
+  "email": "12540041@mail.sustech.edu.cn",
+  "root": "/data/qiuyk/exp/RL-Verifier",
+  "host": "dell-DSS8440",
+  "executable": "/data/qiuyk/exp/RL-Verifier/.venv/bin/python",
+  "cpu_count": 48,
+  "cpu_count_logical": 96,
+  "gpu": "Tesla V100S-PCIE-32GB",
+  "gpu_count": 8,
+  "disk": {
+    "/": {
+      "total": "1887901937664",
+      "used": "1640029163520"
+    }
+  },
+  "memory": {
+    "total": "269877616640"
+  },
+  "gpu_nvidia": [
+    {
+      "name": "Tesla V100S-PCIE-32GB",
+      "memoryTotal": "34359738368",
+      "cudaCores": 5120,
+      "architecture": "Volta",
+      "uuid": "GPU-118318fd-712a-76cc-143d-60c1564c4a95"
+    },
+    {
+      "name": "Tesla V100S-PCIE-32GB",
+      "memoryTotal": "34359738368",
+      "cudaCores": 5120,
+      "architecture": "Volta",
+      "uuid": "GPU-d3169e27-4457-b5c9-1009-677bb4c9a91b"
+    },
+    {
+      "name": "Tesla V100S-PCIE-32GB",
+      "memoryTotal": "34359738368",
+      "cudaCores": 5120,
+      "architecture": "Volta",
+      "uuid": "GPU-566e6173-a475-bca2-2641-291475887374"
+    },
+    {
+      "name": "Tesla V100S-PCIE-32GB",
+      "memoryTotal": "34359738368",
+      "cudaCores": 5120,
+      "architecture": "Volta",
+      "uuid": "GPU-a45326f6-abd9-d2a5-edba-1e6a29b44dc8"
+    },
+    {
+      "name": "Tesla V100S-PCIE-32GB",
+      "memoryTotal": "34359738368",
+      "cudaCores": 5120,
+      "architecture": "Volta",
+      "uuid": "GPU-2ba1c85b-1444-69ea-58ac-7636ce35e6a9"
+    },
+    {
+      "name": "Tesla V100S-PCIE-32GB",
+      "memoryTotal": "34359738368",
+      "cudaCores": 5120,
+      "architecture": "Volta",
+      "uuid": "GPU-2ad3a20a-c346-741a-6fe6-954211aa6349"
+    },
+    {
+      "name": "Tesla V100S-PCIE-32GB",
+      "memoryTotal": "34359738368",
+      "cudaCores": 5120,
+      "architecture": "Volta",
+      "uuid": "GPU-59cd037e-f7e1-10d7-9cdd-b102cd2318d5"
+    },
+    {
+      "name": "Tesla V100S-PCIE-32GB",
+      "memoryTotal": "34359738368",
+      "cudaCores": 5120,
+      "architecture": "Volta",
+      "uuid": "GPU-36363295-36ae-d729-c42d-005119d96284"
+    }
+  ],
+  "cudaVersion": "12.8",
+  "writerId": "lfvfur60mczqyv8bc7xltqo07yz3bby2"
+}
